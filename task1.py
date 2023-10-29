@@ -9,22 +9,20 @@ def input_error(func):
             return "Enter user name."
         except IndexError:
             return "Give me name and phone please."
-        except PhoneValidationError:
-            return "Phone number must be a 10-digit number"
 
     return inner
 
 
-class PhoneValidationError(Exception):
-    pass
+# class PhoneValidationError(Exception):
+#     pass
 
 
-# клас Phone з валідацією помилки на кількість цифр
-class Phone:
-    def __init__(self, value):
-        if not value.isdigit() or len(value) != 10:
-            raise PhoneValidationError("Phone should contain exactly 10 digits.")
-        self.value = value
+# # клас Phone з валідацією помилки на кількість цифр
+# class Phone:
+#     def __init__(self, value):
+#         if not value.isdigit() or len(value) != 10:
+#             raise PhoneValidationError("Phone should contain exactly 10 digits.")
+#         self.value = value
 
 
 # розбиває введений рядок на слова, використовуючи пробіл як розділювач
@@ -37,13 +35,14 @@ def parse_input(user_input):
 # новий контакт
 @input_error
 def add_contact(args, contacts):
-    name, phone = args
+    name = args[0]
+    phone = args[1]
     # валідація номера телефону
-    try:
-        phone = Phone(phone)
-    except PhoneValidationError as e:
-        return str(e)
-    contacts[name.lower()] = phone.value
+    # try:
+    #     phone = 
+    # except PhoneValidationError as e:
+    #     return str(e)
+    contacts[name.lower()] = phone
     return "Contact added."
 
 
@@ -52,11 +51,11 @@ def add_contact(args, contacts):
 def change_contact(args, contacts):
     name, phone = args
     # валідація номера телефону
-    try:
-        phone = Phone(phone)
-    except PhoneValidationError as e:
-        return str(e)
-    contacts[name.lower()] = phone.value
+    # try:
+    #     phone = Phone(phone)
+    # except PhoneValidationError as e:
+    #     return str(e)
+    contacts[name.lower()] = phone
     return "Contact updated."
 
 
